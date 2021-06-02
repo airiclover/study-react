@@ -3,8 +3,15 @@ import { Footer } from "src/components/Footer";
 import { Header } from "src/components/Header";
 import { Main } from "src/components/Main";
 import styles from "src/styles/Home.module.css";
+import { useCounter } from "src/hooks/useCounter";
+import { useInputArray } from "src/hooks/useInputArray";
+import { useBgLightBkuse } from "src/hooks/useBgLightBkuse";
 
-export default function Home() {
+export default function About() {
+  const { count, isShow, handleClick, handleDisplay } = useCounter();
+  const { text, array, handleChange, handleAdd } = useInputArray();
+  useBgLightBkuse();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,6 +21,19 @@ export default function Home() {
       </Head>
 
       <Header />
+
+      <button href="/about" onClick={handleClick}>
+        ボタン
+      </button>
+      <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
+      <input type="text" value={text} onChange={handleChange} />
+      <button onClick={handleAdd}>追加</button>
+      {isShow ? <h2>{count}</h2> : null}
+      <ol>
+        {array.map((item) => {
+          return <li key={item}>{item}</li>;
+        })}
+      </ol>
 
       <Main page="about" />
 
