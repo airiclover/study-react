@@ -1,25 +1,48 @@
 import { Links } from "../Links";
 import styles from "src/components/Main/Main.module.css";
 import { Headline } from "src/components/Headline";
-import { useEffect } from "react";
+import { useCallback, useState } from "react";
+
+const ITEMS = [
+  {
+    href: "https://nextjs.org/docs",
+    title: "Documentation →",
+    discription: "Find in-depth information about Next.js features and API.",
+  },
+  {
+    href: "https://nextjs.org/learn",
+    title: "Learn →",
+    discription: "Learn about Next.js in an interactive course with quizzes!",
+  },
+  {
+    href: "https://github.com/vercel/next.js/tree/master/examples",
+    title: "Examples →",
+    discription: "Discover and deploy boilerplate example Next.js projects.",
+  },
+  {
+    href: "https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app",
+    title: "Deploy →",
+    discription:
+      "Instantly deploy your Next.js site to a public URL with Vercel.",
+  },
+];
 
 export function Main(props) {
-  // useEffect(() => {
-  //   console.log("マウント時");
-  //   document.body.style.backgroundColor = "lightblue";
-  //   return () => {
-  //     console.log("アンマウント時");
-  //     document.body.style.backgroundColor = "";
-  //   };
-  // }, []);
+  const [items, setitems] = useState(ITEMS);
+
+  const handleReduce = useCallback(() => {
+    setitems((prevItems) => {
+      return prevItems.slice(0, prevItems.length - 1);
+    });
+  }, []);
 
   return (
     <div>
       <main className={styles.main}>
-        <Headline page={props.page}>
-          <code className={styles.code}>pages/{props.page}.js</code>
+        <Headline page={props.page} handleReduce={handleReduce}>
+          <code className={styles.code}>{items.length}</code>
         </Headline>
-        <Links />
+        <Links items={items} />
       </main>
     </div>
   );
