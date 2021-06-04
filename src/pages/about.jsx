@@ -5,7 +5,7 @@ import { Main } from "src/components/Main";
 import styles from "src/styles/Home.module.css";
 
 export default function About({
-  count,
+  doubleCount,
   isShow,
   handleClick,
   handleDisplay,
@@ -30,7 +30,7 @@ export default function About({
       <button onClick={handleDisplay}>{isShow ? "非表示" : "表示"}</button>
       <input type="text" value={text} onChange={handleChange} />
       <button onClick={handleAdd}>追加</button>
-      {isShow ? <h2>{count}</h2> : null}
+      {isShow ? <h2>{doubleCount}</h2> : null}
       <ol>
         {array.map((item) => {
           return <li key={item}>{item}</li>;
