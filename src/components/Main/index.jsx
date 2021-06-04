@@ -27,7 +27,7 @@ const ITEMS = [
   },
 ];
 
-export function Main(props) {
+export const Main = (props) => {
   const [items, setitems] = useState(ITEMS);
 
   const handleReduce = useCallback(() => {
@@ -46,4 +46,4 @@ export function Main(props) {
       </main>
     </div>
   );
-}
+};
